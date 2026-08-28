@@ -6,13 +6,12 @@ use core::mem::ManuallyDrop;
 use ogc_rs::{
     ffi::{
         GX_CLR_RGBA, GX_COLOR0A0, GX_MODULATE, GX_PASSCLR, GX_POS_XYZ, GX_REPLACE, GX_RGBA8,
-        GX_S16, GX_TEXCOORD0, GX_TEXMAP0, GX_TEX_ST, GX_TF_CMPR, GX_TF_RGBA8, GX_U8, GX_VA_CLR0,
-        GX_VA_POS, GX_VA_TEX0,
+        GX_S16, GX_TEX_ST, GX_TEXCOORD0, GX_TEXMAP0, GX_TF_CMPR, GX_TF_RGBA8, GX_U8,
     },
     gu::{Gu, RotationAxis},
     gx::{
-        types::VtxDest, CmpFn, Color, CullMode, Gx, Primitive, ProjectionType, TexFilter, Texture,
-        VtxAttr, WrapMode,
+        CmpFn, Color, CullMode, Gx, Primitive, ProjectionType, TexFilter, Texture, VtxAttr,
+        WrapMode, types::VtxDest,
     },
     print, println,
     video::Video,
@@ -116,18 +115,18 @@ extern "C" fn main(_argc: isize, _argv: *const *const u8) -> isize {
     let colors: [[u8; 4]; 3] = [[255, 0, 0, 255], [0, 255, 0, 255], [0, 0, 255, 255]];
     let tex: [[u8; 2]; 3] = [[0, 1], [1, 0], [1, 1]];
     Gx::set_array(
-        GX_VA_POS,
+        VtxAttr::Pos,
         &positions,
         core::mem::size_of::<[i16; 3]>().try_into().unwrap(),
     );
 
     Gx::set_array(
-        GX_VA_CLR0,
+        VtxAttr::Color0,
         &colors,
         core::mem::size_of::<[u8; 4]>().try_into().unwrap(),
     );
     Gx::set_array(
-        GX_VA_TEX0,
+        VtxAttr::Tex0,
         &tex,
         core::mem::size_of::<[u8; 2]>().try_into().unwrap(),
     );

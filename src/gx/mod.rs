@@ -1119,6 +1119,12 @@ pub enum VtxAttr {
     Tex7MtxIdx = ffi::GX_VA_TEX7MTXIDX as _,
 }
 
+impl From<VtxAttr> for u32 {
+    fn from(attr: VtxAttr) -> u32 {
+        attr as u32
+    }
+}
+
 /// Structure describing how a single vertex attribute will be referenced.
 ///
 /// An array of these structures can be used to describe all the attributes in a vertex. The
@@ -1949,8 +1955,8 @@ impl Gx {
 
     /// Sets the array base pointer and stride for a single attribute.
     /// See [GX_SetArray](https://libogc.devkitpro.org/gx_8h.html#a5164fc6aa2a678d792af80d94bfa1ec2) for more.
-    pub fn set_array<T>(attr: u32, array: &[T], stride: u8) {
-        unsafe { ffi::GX_SetArray(attr, array.as_ptr() as *mut c_void, stride) }
+    pub fn set_array<T>(attr: VtxAttr, array: &[T], stride: u8) {
+        unsafe { ffi::GX_SetArray(attr.into(), array.as_ptr() as *mut c_void, stride) }
     }
 
     /// Begins drawing of a graphics primitive.

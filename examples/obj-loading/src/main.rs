@@ -13,8 +13,8 @@ use ogc_rs::{
     ffi::{GX_COLOR0A0, GX_MODULATE, GX_POS_XYZ, GX_TEXCOORD0, GX_TEXMAP0, GX_TF_CMPR, GX_VA_POS},
     gu::Gu,
     gx::{
-        types::VtxDest, CmpFn, Color, CullMode, Gx, Primitive, ProjectionType, TexFilter, Texture,
-        VtxAttr, WrapMode,
+        CmpFn, Color, CullMode, Gx, Primitive, ProjectionType, TexFilter, Texture, VtxAttr,
+        WrapMode, types::VtxDest,
     },
     println,
     video::Video,
@@ -113,18 +113,18 @@ extern "C" fn main(_argc: isize, _argv: *const *const u8) -> isize {
     let tex: Vec<[f32; 2]> = obj.texcoords().unwrap().collect::<Vec<[f32; 2]>>();
 
     Gx::set_array(
-        GX_VA_POS,
+        VtxAttr::Pos,
         &positions,
         core::mem::size_of::<[f32; 3]>().try_into().unwrap(),
     );
 
     Gx::set_array(
-        GX_VA_NRM,
+        VtxAttr::Nrm,
         &normals,
         core::mem::size_of::<[f32; 3]>().try_into().unwrap(),
     );
     Gx::set_array(
-        GX_VA_TEX0,
+        VtxAttr::Tex0,
         &tex,
         core::mem::size_of::<[f32; 2]>().try_into().unwrap(),
     );

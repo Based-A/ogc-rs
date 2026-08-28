@@ -6,10 +6,10 @@ use core::mem::ManuallyDrop;
 use ogc_rs::{
     ffi::{
         GX_CLR_RGBA, GX_COLOR0A0, GX_PASSCLR, GX_POS_XYZ, GX_RGBA8, GX_S16, GX_TEXCOORDNULL,
-        GX_TEXMAP_NULL, GX_VA_CLR0, GX_VA_POS,
+        GX_TEXMAP_NULL,
     },
     gu::{Gu, RotationAxis},
-    gx::{types::VtxDest, CmpFn, Color, CullMode, Gx, Primitive, ProjectionType, VtxAttr},
+    gx::{CmpFn, Color, CullMode, Gx, Primitive, ProjectionType, VtxAttr, types::VtxDest},
     video::Video,
 };
 
@@ -83,13 +83,13 @@ extern "C" fn main(_argc: isize, _argv: *const *const u8) -> isize {
     let colors: [[u8; 4]; 3] = [[255, 0, 0, 255], [0, 255, 0, 255], [0, 0, 255, 255]];
 
     Gx::set_array(
-        GX_VA_POS,
+        VtxAttr::Pos,
         &positions,
         core::mem::size_of::<[i16; 3]>().try_into().unwrap(),
     );
 
     Gx::set_array(
-        GX_VA_CLR0,
+        VtxAttr::Color0,
         &colors,
         core::mem::size_of::<[u8; 4]>().try_into().unwrap(),
     );
