@@ -210,9 +210,9 @@ pub struct HostInformation {
     /// A NULL-terminated array of alternate names.
     pub aliases: Vec<String>,
     /// The type of address being returned.
-    pub address_type: core::ffi::c_short,
+    pub address_type: core::ffi::c_int,
     /// The length, in bytes, of each address.
-    pub length: core::ffi::c_short,
+    pub length: core::ffi::c_int,
     /// A NULL-terminated list of addresses for the host.
     pub address_list: Vec<String>,
 }
