@@ -18,7 +18,10 @@
         inherit inputs;
       }
       {
-        perSystem = {config, system, ...}: {
+        imports = [
+          inputs.flake-parts.flakeModules.easyOverlay
+        ];
+        perSystem = {config, system, final, ...}: {
           # Pull the official devkitPro Docker images and patch the binary files to work with Nix.
           # These are made available as packages to be added to a Nix environment.
           packages =
@@ -128,6 +131,17 @@
 
               LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
             };
+          };
+          # Expose a Nixpkgs Overlay for third party projects to import the devkitPro Toolchain.
+          overlayAttrs = {
+            inherit (config.packages)
+              devkitA64
+              devkitARM
+              devkitPPC
+              stdenvA64
+              stdenvARM
+              stdenvPPC
+              ;
           };
       };
       # This flake will build for these system architectures.
