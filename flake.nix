@@ -19,7 +19,7 @@
       }
       {
         perSystem = {config, system, ...}: {
-          # Pull the official libogc Docker images and patch the binary files to work with Nix.
+          # Pull the official devkitPro Docker images and patch the binary files to work with Nix.
           # These are made available as packages to be added to a Nix environment.
           packages =
           let
