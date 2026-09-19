@@ -33,7 +33,7 @@ If everything's working properly, `cargo check` should run successfully.
 Alternatively, if you use the Nix package manager with the Flakes feature enabled, we offer a [`flake.nix`](flake.nix) that provides a convenient way to build and use this library.
 
 The flake will read the [`rust-toolchain.toml`](rust-toolchain.toml) file to automatically install and set up a nightly Rust toolchain using the [`rust-overlay` flake](https://github.com/oxalica/rust-overlay).
-Additionally, the devkitPro toolchain is also provided via the [devkitNix flake](https://github.com/bandithedoge/devkitNix).
+Additionally, the devkitPro toolchain is automatically installed for you using devkitPro's official Docker images that are patched to run in a Nix environment.
 
 To get started, fork this repo and `git clone` your fork into your local machine.
 Once it's finished, `cd` into the `ogc-rs` directory and run `nix develop` to enter the development shell.
